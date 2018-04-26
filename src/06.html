@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>localDB 测试</title>
+  <script src="./myStorage.js"></script>
+  <script src="./json2.js"></script>
+  <script src="./localDB.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  // 创建一个叫Man存储空间
+  localDB.createSpace('Man');
+
+  // 可以向Man插入任何类型的数据
+  localDB.insert('Man', 'Keung');
+  localDB.insert('Man', {name: 'wang', age: 26});
+  localDB.insert('Man', 18);
+  localDB.insert('Man', false);
+  localDB.insert('Man', [1, 2, 3]);
+
+  // 更新某个数据，第二个参数需要跟插入时对应的参数的值一模一样
+  localDB.update('Man', 'Keung', 'MK');
+  localDB.update('Man', {name: 'wang', age: 26}, {name: 'Keung', age: 16});
+
+  // 按条件查询数据并返回结果数组，最多可按条件深度挖掘到空间的第三层数据，有兴趣的童鞋可以加个递归让它不停挖掘数据
+  var some = localDB.select('Man','MK');
+  // 不输入第二、三参数则查找空间中全部数据
+  var all = localDB.select('Man');
+  // var all = localDB.select("Man", 'all', true);
+
+  // 删除空间中的数据，第二个参数需要跟插入时对应的参数值一模一样
+  localDB.delete("Man","MK");
+  //删除Coffe空间，空间所有数据丢失
+  localDB.deleteSpace("Man");
+</script>

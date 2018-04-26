@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>myStorage 测试</title>
+  <script src="./myStorage.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  console.log(cookieStorage.getItem('name'));
+  cookieStorage.setItem('name', 'ManKeung');
+  console.log(cookieStorage.getItem('name'));
+  cookieStorage.removeItem('name');
+  console.log(cookieStorage.getItem('name'));
+  cookieStorage.setItem('name', 'ManKeung');
+  cookieStorage.setItem('age', 18);
+  console.log(document.cookie);
+  cookieStorage.clear();
+  console.log(document.cookie);
+</script>

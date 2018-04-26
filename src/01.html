@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>localStorage 使用测试</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+  // 设置
+  localStorage.setItem('coffeeType', 'mocaha');
+  localStorage.setItem('coffeePrice', '28');
+  verift();
+
+  localStorage.removeItem('coffeeType');
+  verift();
+
+  localStorage.clear();
+  verift();
+
+  // 自定义验证函数，验证coffeeType和coffeePrice的数据是否存在
+  function verift() {
+    var type = localStorage.getItem('coffeeType');
+    var price = localStorage.getItem('coffeePrice');
+    type = type ? type : '不存在';
+    price = price ? price : '不存在';
+
+    alert('coffeeType: ' + type + '\n\n' + 'coffeePrice: ' + price);
+  }
+</script>

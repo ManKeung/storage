@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>测试Web SQL数据库</title>
+</head>
+
+<body>
+  <div id="msg">
+    <b>Test测试Web SQL</b>
+    <br>
+    <br>
+    <br>
+  </div>
+  <script src="webSQL.js"></script>
+  <script type="text/javascript">
+  //自行根据需求，补充完整查询执行后的回调函数，注意有带参数，参数为查询结果
+  webSQL_select_handle = function(rows) {
+    document.getElementById("msg").innerHTML += "正在读取数据<br><br>";
+    for (var i = 0; i < rows.length; i++) {
+      //rows为查询结果，【rows.item(数据行号)】可得到行数据，【rows.item(行号).字段名】可得到行数据中的列字段的数据
+      document.getElementById("msg").innerHTML += ((i + 1) + ". name: " + rows.item(i).name + ", value: " + rows.item(i).value + "<br><br>");
+    }
+  };
+
+  //自行根据需求，补充完整新建数据表后的执行回调函数
+  webSQL_create_handle = function() {
+    document.getElementById("msg").innerHTML += "正在创建数据表<br><br>";
+  };
+
+  //自行根据需求，补充完整插入数据后的执行回调函数
+  webSQL_insert_handle = function() {
+    document.getElementById("msg").innerHTML += "正在插入数据<br><br>";
+  };
+
+  //自行根据需求，补充完整更新数据后的执行回调函数
+  webSQL_update_handle = function() {
+    document.getElementById("msg").innerHTML += "正在更新数据<br><br>";
+  };
+
+  //自行根据需求，补充完整删除数据后的执行回调函数
+  webSQL_delete_handle = function() {
+    document.getElementById("msg").innerHTML += "正在删除数据<br><br>";
+  };
+
+  //自行根据需求，补充完整删除表后的执行回调函数
+  webSQL_drop_handle = function() {
+    document.getElementById("msg").innerHTML += "正在清空并删除数据表<br><br>";
+  }
+
+  //实例化webSQL类
+  var db = new webSQL("MyDatabase");
+
+  //新建一个表，带有两个字段，分别为name和value
+  db.create("myTable", ["name", "value"]);
+
+  //插入两个数据，分别是Coffe和me
+  db.insert("myTable", ["name", "value"], ["Coffee", "me"]);
+
+  //插入两个数据，分别是JavaScript和good
+  db.insert("myTable", ["name", "value"], ["JavaScript", "good"]);
+
+  //查询所有数据
+  db.select("myTable");
+
+  //更新数据，将name字段为Coffee的值更改为lhb
+  db.update("myTable", ["name"], ["lhb"], ["name"], ["Coffee"]);
+
+  //查询所有数据
+  db.select("myTable");
+
+  //删除name为lhb的数据
+  db.delete("myTable", ["name"], ["lhb"]);
+
+  //查询所有数据
+  db.select("myTable");
+
+  //删除表
+  db.drop("myTable");
+
+  </script>
+</body>
+
+</html>
